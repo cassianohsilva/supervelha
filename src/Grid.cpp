@@ -37,7 +37,7 @@ void Grid::generate() {
 
 		for (int j = 0; j < mWidth; ++j) {
 			mGrid[i][j] = new Square(squareSize - margin);
-			mGrid[i][j]->setPosition(i * squareSize.y, j * squareSize.x);
+			mGrid[i][j]->setPosition(j * squareSize.x + 0.05 * squareSize.x, i * squareSize.y + 0.05 * squareSize.y);
 		}
 	}
 }
@@ -61,14 +61,14 @@ const Square* Grid::getSquareAtPosition(const sf::Vector2f& position) const {
 		do {
 			++i;
 		} while (i + 1 < mHeight
-				&& (mGrid[i + 1][0]->getPosition().y
-						+ mGrid[i + 1][0]->getSize().y) < position.y);
+				&& (mGrid[i][0]->getPosition().y
+						+ mGrid[i][0]->getSize().y) < position.y);
 
 		do {
 			++j;
 		} while (j + 1 < mWidth
-				&& (mGrid[0][j + 1]->getPosition().x
-						+ mGrid[0][j + 1]->getSize().x) < position.x);
+				&& (mGrid[0][j]->getPosition().x
+						+ mGrid[0][j]->getSize().x) < position.x);
 	}
 
 	if (i < 0 || j < 0) {
