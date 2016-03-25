@@ -9,7 +9,7 @@
 
 Game::Game() :
 		window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "SuperVelha"), mGrid(
-				8, sf::Vector2f(400.0f, 400.0f)) {
+				8, sf::Vector2f(400.0f, 400.0f)), mPlayer1(new Player(PlayerType::X)), mPlayer2(nullptr) {
 
 }
 
@@ -28,7 +28,7 @@ void Game::run() {
 
 			if(event.type == sf::Event::MouseButtonReleased) {
 				if(event.mouseButton.button == sf::Mouse::Left) {
-					mGrid.onClickListener(sf::Vector2f(event.mouseButton.x, event.mouseButton.y));
+					mGrid.onClickListener(sf::Vector2f(event.mouseButton.x, event.mouseButton.y), mPlayer1);
 				}
 			}
 		}

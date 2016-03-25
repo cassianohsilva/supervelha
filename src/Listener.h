@@ -10,11 +10,13 @@
 
 #include <SFML/Window.hpp>
 
+#include "Player.h"
+
 class IClickListener {
 public:
 	virtual ~IClickListener() {}
 
-	virtual bool onClickListener(const sf::Vector2f& position) = 0;
+	virtual bool onClickListener(const sf::Vector2f& position, Player* player) = 0;
 };
 
 

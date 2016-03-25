@@ -46,15 +46,20 @@ void Grid::reset() {
 	// TODO Implementar este método
 }
 
-bool Grid::onClickListener(const sf::Vector2f& position) {
-	if (getSquareAtPosition(position)) {
+bool Grid::onClickListener(const sf::Vector2f& position, Player* player) {
+
+	Square* square = getSquareAtPosition(position);
+
+	if (square) {
+		square->place(player);
+
 		return true;
 	}
 
 	return false;
 }
 
-const Square* Grid::getSquareAtPosition(const sf::Vector2f& position) const {
+Square* Grid::getSquareAtPosition(const sf::Vector2f& position) {
 	int i = -1, j = -1;
 
 	if (pointInsideRect(sf::FloatRect(getPosition(), getSize()), position)) {

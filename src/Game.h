@@ -12,6 +12,8 @@
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
 
+#include "Player.h"
+
 #define SCREEN_WIDTH 800
 #define SCREEN_HEIGHT 600
 
@@ -28,6 +30,8 @@ private:
 	sf::RenderWindow window;
 
 	Grid mGrid;
+	Player* mPlayer1;
+	Player* mPlayer2;
 };
 
 #endif /* GAME_H_ */
