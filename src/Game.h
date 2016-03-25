@@ -12,12 +12,11 @@
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
 
+#include "Grid.h"
 #include "Player.h"
 
 #define SCREEN_WIDTH 800
 #define SCREEN_HEIGHT 600
-
-#include "Grid.h"
 
 class Game {
 public:
@@ -28,6 +27,9 @@ public:
 
 private:
 	void changePlayer();
+
+	bool isStarted;
+	bool isFinished;
 
 	sf::RenderWindow window;
 

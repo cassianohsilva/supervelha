@@ -18,12 +18,14 @@ public:
 	virtual ~Square();
 
 	const sf::Vector2f& getSize() const { return mSize; }
-	bool place(const Player* player);
+	bool place(Player* player);
+
+	Player * getPlayer() { return mPlayer; }
 
 private:
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
-	const Player* mPlayer;
+	Player* mPlayer;
 	sf::Font mFont;
 	sf::Text mText;
 	sf::Vector2f mSize;

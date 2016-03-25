@@ -22,7 +22,7 @@ Square::~Square() {
 
 }
 
-bool Square::place(const Player* player) {
+bool Square::place(Player* player) {
 	if (!mPlayer) {
 		mPlayer = player;
 

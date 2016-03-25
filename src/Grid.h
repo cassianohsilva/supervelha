@@ -11,7 +11,14 @@
 #include "Square.h"
 #include "Listener.h"
 
+#include <map>
+
 #include <SFML/Graphics.hpp>
+
+struct GridPosition {
+	int line;
+	int column;
+};
 
 class Grid : public sf::Drawable, public sf::Transformable, public IClickListener, private sf::NonCopyable {
 public:
@@ -22,19 +29,36 @@ public:
 
 	const sf::Vector2f& getSize() const { return mSize; }
 
+	const Player* getWinner() const { return mWinner; }
+	bool hasWinner() const;
+
+	bool isDraw() const { return mIsDraw; }
+
 private:
 	void generate();
 	void reset();
 
-	Square* getSquareAtPosition(const sf::Vector2f& position);
+	bool checkWinner(const GridPosition& lastMove);
+
+	GridPosition getGridPosition(const sf::Vector2f& position);
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+	bool verificarLimite(int linha, int coluna) const;
+
+//	GridPosition mLastMove;
+
+	static int vectors[4][2];
 
 	int mWidth;
 	int mHeight;
+	int mMoves;
+
+	bool mIsDraw;
 
 	sf::Vector2f mSize;
 
 	Square *** mGrid;
+
+	Player* mWinner;
 };
 
 #endif /* GRID_H_ */

@@ -8,10 +8,12 @@
 #include "Game.h"
 
 Game::Game() :
-		window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "SuperVelha"), mGrid(8, sf::Vector2f(400.0f, 400.0f)), mPlayer1(
+		isStarted(false), isFinished(false), window(
+				sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "SuperVelha"), mGrid(
+				8, sf::Vector2f(400.0f, 400.0f)), mPlayer1(
 				new Player("p1", PlayerType::X)), mPlayer2(
-				new Player("p2", PlayerType::O)), mPlayers{mPlayer1, mPlayer2}, mCurrentPlayer(
-						0) {
+				new Player("p2", PlayerType::O)), mPlayers { mPlayer1, mPlayer2 }, mCurrentPlayer(
+				0) {
 
 }
 
@@ -20,6 +22,8 @@ Game::~Game() {
 }
 
 void Game::run() {
+	isStarted = true;
+
 	while (window.isOpen()) {
 		sf::Event event;
 
@@ -28,14 +32,28 @@ void Game::run() {
 				window.close();
 			}
 
-			if (event.type == sf::Event::MouseButtonReleased) {
-				if (event.mouseButton.button == sf::Mouse::Left) {
-					bool click = mGrid.onClickListener(
-							sf::Vector2f(event.mouseButton.x,
-									event.mouseButton.y), mPlayers[mCurrentPlayer]);
+			if (!isFinished) {
+				if (event.type == sf::Event::MouseButtonReleased) {
+					if (event.mouseButton.button == sf::Mouse::Left) {
+						bool click = mGrid.onClickListener(
+								sf::Vector2f(event.mouseButton.x,
+										event.mouseButton.y),
+								mPlayers[mCurrentPlayer]);
 
-					if(click) {
-						changePlayer();
+						if (click) {
+							changePlayer();
+						}
+
+						if (mGrid.hasWinner()) {
+							if (!mGrid.isDraw()) {
+								printf("WINNER: %s\n",
+										mGrid.getWinner()->getName().c_str());
+							} else {
+								printf("DRAW!\n");
+							}
+
+							isFinished= true;
+						}
 					}
 				}
 			}

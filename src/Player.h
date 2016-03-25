@@ -21,6 +21,8 @@ public:
 	Player(const std::string& name, PlayerType type);
 	virtual ~Player();
 
+	const std::string& getName() const { return mName; }
+
 	const PlayerType getType() const {
 		return mType;
 	}
