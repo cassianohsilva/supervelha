@@ -15,6 +15,8 @@ public:
 	Square(const sf::Vector2f& size);
 	virtual ~Square();
 
+	const sf::Vector2f& getSize() const { return mSize; }
+
 private:
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
