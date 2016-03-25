@@ -12,27 +12,13 @@
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
 
-#include "Grid.h"
+#include "Game.h"
 
 int main(void) {
 
-	Grid* g = new Grid(8, sf::Vector2f(200.0f, 200.0f));
+	Game* game = new Game();
 
-	sf::RenderWindow window(sf::VideoMode(800, 600), "SuperVelha");
-
-	while(window.isOpen()) {
-		sf::Event event;
-
-		if(window.pollEvent(event)) {
-			if(event.type == sf::Event::Closed) {
-				window.close();
-			}
-		}
-
-		window.clear(sf::Color(0xFF, 0xFF, 0xFF));
-		window.draw(*g);
-		window.display();
-	}
+	game->run();
 
 	return EXIT_SUCCESS;
 }

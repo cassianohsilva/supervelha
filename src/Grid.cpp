@@ -13,7 +13,13 @@ Grid::Grid(uint gridSize, const sf::Vector2f& size) :
 }
 
 Grid::~Grid() {
-
+	for (int i = 0; i < mHeight; ++i) {
+		for (int j = 0; j < mWidth; ++j) {
+			delete mGrid[i][j];
+		}
+		delete [] mGrid[i];
+	}
+	delete [] mGrid;
 }
 
 void Grid::generate() {
@@ -26,7 +32,7 @@ void Grid::generate() {
 
 		for (int j = 0; j < mWidth; ++j) {
 			Square* sq = new Square(squareSize);
-			sq->setPosition(i* squareSize.y * 1.1, j * squareSize.x * 1.1);
+			sq->setPosition(i * squareSize.y * 1.1, j * squareSize.x * 1.1);
 
 			mGrid[i][j] = sq;
 		}
