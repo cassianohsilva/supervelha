@@ -8,8 +8,10 @@
 #include "Game.h"
 
 Game::Game() :
-		window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "SuperVelha"), mGrid(
-				8, sf::Vector2f(400.0f, 400.0f)), mPlayer1(new Player(PlayerType::X)), mPlayer2(nullptr) {
+		window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "SuperVelha"), mGrid(8, sf::Vector2f(400.0f, 400.0f)), mPlayer1(
+				new Player("p1", PlayerType::X)), mPlayer2(
+				new Player("p2", PlayerType::O)), mPlayers{mPlayer1, mPlayer2}, mCurrentPlayer(
+						0) {
 
 }
 
@@ -26,9 +28,15 @@ void Game::run() {
 				window.close();
 			}
 
-			if(event.type == sf::Event::MouseButtonReleased) {
-				if(event.mouseButton.button == sf::Mouse::Left) {
-					mGrid.onClickListener(sf::Vector2f(event.mouseButton.x, event.mouseButton.y), mPlayer1);
+			if (event.type == sf::Event::MouseButtonReleased) {
+				if (event.mouseButton.button == sf::Mouse::Left) {
+					bool click = mGrid.onClickListener(
+							sf::Vector2f(event.mouseButton.x,
+									event.mouseButton.y), mPlayers[mCurrentPlayer]);
+
+					if(click) {
+						changePlayer();
+					}
 				}
 			}
 		}
@@ -37,4 +45,8 @@ void Game::run() {
 		window.draw(mGrid);
 		window.display();
 	}
+}
+
+void Game::changePlayer() {
+	mCurrentPlayer = ++mCurrentPlayer % 2;
 }

@@ -18,7 +18,7 @@ std::string PlayerTypeToString(const PlayerType& type);
 
 class Player {
 public:
-	Player(PlayerType type);
+	Player(const std::string& name, PlayerType type);
 	virtual ~Player();
 
 	const PlayerType getType() const {
@@ -26,6 +26,7 @@ public:
 	}
 
 private:
+	std::string mName;
 	PlayerType mType;
 };
 

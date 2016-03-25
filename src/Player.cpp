@@ -13,7 +13,7 @@ std::string PlayerTypeToString(const PlayerType& type) {
 	return type == PlayerType::O ? "O" : "X";
 }
 
-Player::Player(PlayerType type) : mType(type) {
+Player::Player(const std::string& name, PlayerType type) : mName(name), mType(type) {
 
 }
 

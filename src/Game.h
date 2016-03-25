@@ -27,11 +27,18 @@ public:
 	void run();
 
 private:
+	void changePlayer();
+
 	sf::RenderWindow window;
 
 	Grid mGrid;
+
 	Player* mPlayer1;
 	Player* mPlayer2;
+
+	Player * mPlayers[2];
+
+	int mCurrentPlayer;
 };
 
 #endif /* GAME_H_ */
